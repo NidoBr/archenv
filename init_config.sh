@@ -8,6 +8,7 @@
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 echo 'LANG=pt_BR.UTF-8' > /etc/locale.conf
+echo 'pt_BR.UTF-8 UTF-8' > /etc/locale.gen
 locale-gen
 echo 'KEYMAP=br-abnt2' > /etc/vconsole.conf
 
