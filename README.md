@@ -1,6 +1,6 @@
 # archenv
 ## Creates a clean, build-ready environment based on Arch Linux.
-Fiz para compilar PKGBUILD de forma mais limpa, evitando alguns erros que geralmente podem ocorrer em um ambiente poluido
+I created this to compile PKGBUILD in a cleaner way, avoiding some errors that can commonly occur in a cluttered environment.
 
 ## Files:
 ```
