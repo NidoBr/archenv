@@ -1,6 +1,6 @@
 # archenv
 ## Creates a clean, build-ready environment based on Arch Linux.
-I created this to compile PKGBUILD in a cleaner way, avoiding some errors that can commonly occur in a cluttered environment.
+I created this to compile [PKGBUILD](https://wiki.archlinux.org/title/PKGBUILD) in a cleaner way, avoiding some errors that can commonly occur in a cluttered environment.
 
 ## Files:
 ```
@@ -27,3 +27,10 @@ To enter the environment:
 To shut down correctly, unmounting all targets:
 # archenv stop
 ```
+
+## Useful links
+[Arch build system](https://wiki.archlinux.org/title/Arch_build_system)
+
+[Makepkg](https://wiki.archlinux.org/title/Makepkg)
+
+[PKGBUILD](https://wiki.archlinux.org/title/PKGBUILD)
