@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+#
+# NidoBr <nidobrcontato@gmail.com>
+#
+
+[[ "${UID}" -ne '0' ]] && {
+	printf '%s\n' "Root only!"
+	exit 1
+}
+
+_direnv="/usr/local/arch-buildenv"
+
+case "${1}" in
+	"start")
+		mount -t proc proc "${_direnv}/proc"
+		mount --rbind /sys "${_direnv}/sys"
+		mount --rbind /dev "${_direnv}/dev"
+		mount --make-rslave "${_direnv}/sys"
+		mount --make-rslave "${_direnv}/dev"
+		printf '%s\n' 'Montado com sucesso!'
+		chroot "${_direnv}" /usr/local/sbin/start_tmpfs
+	;;
+	"stop")
+		umount -fR ${_direnv}/* 2>/dev/null
+		umount -fR "${_direnv}/var/makepkg"
+		printf '%s\n' "desmontado com sucesso"
+	;;
+	"enter")
+		printf '%s\n' 'Entrando em chroot'
+		arch-chroot "${_direnv}"
+	;;
+	*)
+		printf "\narchenv		start\narchenv		stop\narchenv		enter\n"
+	;;
+esac
+

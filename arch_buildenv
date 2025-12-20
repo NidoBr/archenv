@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+#
+# NidoBr <nidobrcontato@gmail.com>
+#
+
+# VARs
+_direnv="/usr/local/arch-buildenv"
+
+# MAIN
+
+[[ "${UID}" -ne '0' ]] && {
+	printf '%s\n' "Root only!"
+	exit 1
+}
+
+[[ -e "${_direnv}" ]] || {
+	mkdir -p "${_direnv}"
+}
+
+pacstrap -K "${_direnv}" base base-devel devtools nano htop git sudo ccache || {
+	printf '%s\n' "Erro no pacstrap"
+	exit 1
+}
+
+printf '%s\n' "Copiando arquivos"
+cp -f /etc/pacman.conf "${_direnv}/etc" 2>/dev/null
+cp -f /etc/ccache.conf "${_direnv}/etc" 2>/dev/null
+cp -f /etc/makepkg.conf "${_direnv}/etc" 2>/dev/null
+cp init_config.sh "${_direnv}/"
+
+printf '%s\n' 'Montando'
+mount --mkdir -t proc proc "${_direnv}/proc"
+mount --mkdir --rbind /sys "${_direnv}/sys"
+mount --mkdir --rbind /dev "${_direnv}/dev"
+mount --mkdir --make-rslave "${_direnv}/sys"
+mount --mkdir --make-rslave "${_direnv}/dev"
+printf '%s\n' 'Montado com sucesso!'
+
+printf '%s\n' "Executando chroot"
+chroot "${_direnv}" /init_config.sh
+
+umount -fR "${_direnv}/*"
+printf '%s\n' "desmontado com sucesso"
+
+rm "${_direnv}/init_config.sh"
+
+cp archenv /usr/local/sbin
+chmod +x /usr/local/sbin/archenv
