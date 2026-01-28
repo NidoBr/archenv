@@ -1,6 +1,7 @@
 # archenv
 ## Creates a clean, build-ready environment based on Arch Linux.
 I created this to compile [PKGBUILD](https://wiki.archlinux.org/title/PKGBUILD) in a cleaner way, avoiding some errors that can commonly occur in a cluttered environment.
+# Obs: Experimental - not 100% functional; "devtools" or "systemd-nspawn" are more functional and recommended options.
 
 ## Files:
 ```
